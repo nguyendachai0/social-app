@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('comment_content')->nullable();
             $table->string('media')->nullable();
-            $table->foreignId('user_profile_id')->constrained('profile_users')->onDelete('cascade');
+            $table->foreignId('profile_user_id')->constrained('profile_users')->onDelete('cascade');
             $table->foreignId('post_id')->constrained('user_posts')->onDelete('cascade');
             $table->foreignId('parent_comment_id')->nullable()->constrained('post_comments')->onDelete('cascade');
             $table->timestamps();

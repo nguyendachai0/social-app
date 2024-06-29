@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('profile_user_id')->constrained('profile_users')->onDelete('cascade');
-            $table->enum('type', ['message', 'share', 'friend_request']);
+            $table->enum('type', ['message', 'share', 'friend_request', 'comment_like', 'post_comment', 'post_like', 'conversation', 'user_post']);
             $table->unsignedBigInteger('reference_id');
+            $table->string('reference_type');
             $table->enum('status', ['new', 'read'])->default('new');
             $table->timestamps();
-            $table->index(['type', 'reference_id']);
+            $table->index(['reference_type', 'reference_id']);
         });
     }
 

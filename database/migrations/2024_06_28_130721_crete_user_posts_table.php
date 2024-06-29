@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_posts',function (Blueprint $table){
             $table->id();
-            $table->foreignId('profile_id')->constrained('profile_users')->onDelete('cascade');
+            $table->foreignId('profile_user_id')->constrained('profile_users')->onDelete('cascade');
             $table->string('caption');
             $table->string('media_url')->nullable();
             $table->integer('shared_count')->default(0);

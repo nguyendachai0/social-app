@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('profile_user_id')->constrained('profile_users')->onDelete('cascade');
             $table->foreignId('comment_id')->constrained('post_comments')->onDelete('cascade');
+            $table->foreignId('emoji_type_id')->constrained('emojis')->onDelete('cascade');
             $table->timestamps();
             $table->unique(['profile_user_id', 'comment_id']); // Ensure a user can only like a comment once
         });
