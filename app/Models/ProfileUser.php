@@ -50,7 +50,7 @@ class ProfileUser extends Authenticatable
     }
     public function receivedFriendRequests()
     {
-        return $this->hasMany(FriendRequest::class, 'received_id');
+        return $this->hasMany(FriendRequest::class, 'receiver_id');
     }
     public function notifications()
     {

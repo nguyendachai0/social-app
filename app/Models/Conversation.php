@@ -14,4 +14,8 @@ class Conversation extends Model
     {
         return $this->morphMany(Notification::class, 'reference');
     }
+    public function participants()
+    {
+        return $this->hasMany(Participant::class, 'conversation_id');
+    }
 }

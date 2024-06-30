@@ -20,10 +20,11 @@ class CommentLike extends Model
     }
     public function emoji()
     {
-      return $this->belongSto(Emoji::class, 'emoji_type_id');
+      return $this->belongsto(Emoji::class, 'emoji_type_id');
     }
     public function notifcations()
     {
         return $this->morphMany(Notification::class, 'reference');
     }
+    
 }

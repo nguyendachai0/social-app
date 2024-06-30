@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Emoji extends Model
 {
     use HasFactory;
+    protected $table = "emojis";
     protected $fillable = ['type_emoji'];
     public function commentLikes()
     {
