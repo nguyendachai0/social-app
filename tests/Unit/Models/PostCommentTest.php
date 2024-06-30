@@ -18,7 +18,7 @@ class PostCommentTest extends TestCase
         $this->assertInstanceOf(UserPost::class, $postComment->userPost);
     }
 
-    public function testItBeLongsToProfileUser()
+    public function testItBelongsToProfileUser()
     {
         $postComment = PostComment::factory()->create();
         $this->assertInstanceOf(ProfileUser::class, $postComment->profileUser);

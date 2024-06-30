@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class ProfileUser extends Authenticatable
+
+class ProfileUser extends Authenticatable implements JWTSubject
 {  
     use HasFactory;
      /**
@@ -71,6 +73,15 @@ class ProfileUser extends Authenticatable
     public function userPosts()
     {
         return $this->hasMany(UserPost::class, 'profile_user_id');
+    }
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 
 }
