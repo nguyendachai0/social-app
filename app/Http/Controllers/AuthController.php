@@ -7,37 +7,28 @@ use App\Models\ProfileUser;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\RegisterUserRequest;
 use Illuminate\Support\Facades\Validator;
+use  App\Services\ProfileUser\ProfileUserServiceInterface;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    protected $profileUserService;
+
+    public function __construct(ProfileUserServiceInterface $profileUserService)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:profile_users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
-        }
-
-        $user = ProfileUser::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
+        $this->profileUserService  = $profileUserService;
+    }
+    public function register(RegisterUserRequest $request)
+    {
+        $validatedData = $request->validated();
+        $user = $this->profileUserService->createProfileUser($validatedData);
         $token = JWTAuth::fromUser($user);
-
         return response()->json(compact('user', 'token'), 201);
     }
-
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return response()->json(['error' => 'invalid_credentials'], 400);

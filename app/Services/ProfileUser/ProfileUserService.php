@@ -1,6 +1,8 @@
 <?php
 namespace App\Services\ProfileUser;
+
 use App\Repositories\ProfileUser\ProfileUserRepositoryInterface;
+
 class ProfileUserService implements ProfileUserServiceInterface
 {
     private $profileUserRepository;

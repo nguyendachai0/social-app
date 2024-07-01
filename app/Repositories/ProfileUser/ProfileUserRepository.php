@@ -13,7 +13,7 @@ class ProfileUserRepository implements ProfileUserRepositoryInterface
     }
     public function all()
     {
-        reutrn $this->profileUser->all();
+        return $this->profileUser->all();
     }
     public function find($id)
     {
