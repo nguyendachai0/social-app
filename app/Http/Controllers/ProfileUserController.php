@@ -10,5 +10,6 @@ class ProfileUserController extends Controller
     {
         // Select all friend and following 's Post,
         
+        
     }
 }
