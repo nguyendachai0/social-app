@@ -31,4 +31,31 @@ class ProfileUserRepository implements ProfileUserRepositoryInterface
     {
         return $this->profileUser->find($id)->delete();
     }
+    public function findWithRelationships($profileUserId)
+    {
+        return ProfileUser::with([
+            'notifications',
+            'userPosts.postComments.profileUser',
+            'userPosts.postLikes.profileUser',
+            'stories'
+        ])->find($profileUserId);
+    }
+    public function getFriends(ProfileUser $profileUser)
+    {
+        $sentFriendRequests = $profileUser->sentFriendRequests()
+                                                ->where('status',  'accepted')
+                                                ->pluck('receiver_id');
+
+        $receivedFriendRequests = $profileUser->receivedFriendRequests()
+                                                    ->where('status', 'accepted')
+                                                    ->pluck('sender_id');
+        
+        $friendIds = $sentFriendRequests->merge($receivedFriendRequests);
+            return  ProfileUser::whereIn('id', $friendIds)->get();                                            
+    }
+    public function getFriendsWithStories(ProfileUser $profileUser)
+    {
+        $friends = $this->getFriends($profileUser);
+        return $friends->load('stories');
+    }
 }

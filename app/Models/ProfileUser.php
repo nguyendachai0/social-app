@@ -75,6 +75,10 @@ class ProfileUser extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(UserPost::class, 'profile_user_id');
     }
+    public function stories()
+    {
+        return $this->hasMany(Story::class, 'profile_user_id');
+    }
     public function getJWTIdentifier()
     {
         return $this->getKey();

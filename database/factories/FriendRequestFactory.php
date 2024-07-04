@@ -18,9 +18,9 @@ class FriendRequestFactory extends Factory
     public function definition()
     {
         return [
-            'sender_id' => ProfileUser::factory(),
+            'sender_id' => 3,
             'receiver_id' => ProfileUser::factory(),
-            'status' => 'pending',
+            'status' => $this->faker->randomElement(['pending','rejected', 'accepted']),
             'sent_at' => now(),
             'responded_at' => null,
         ];

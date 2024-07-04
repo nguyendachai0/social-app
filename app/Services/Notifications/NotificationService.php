@@ -1,35 +1,35 @@
 <?php
-namespace App\Services\Notofications;
+namespace App\Services\Notifications;
 
-use App\Repositories\Notofications\NotoficationRepositoryInterface;
+use App\Repositories\Notifications\NotificationRepositoryInterface;
 
-class NotoficationService implements NotoficationServiceInterface
+class NotificationService implements NotificationServiceInterface
 {
-    private $notoficationRepository;
+    private $notificationRepository;
 
-    public function __construct(NotoficationRepositoryInterface $notoficationRepository)
+    public function __construct(NotificationRepositoryInterface $notificationRepository)
     {
-        $this->notoficationRepository = $notoficationRepository;
+        $this->notificationRepository = $notificationRepository;
     }
-    public function getAllNotofications()
+    public function getAllNotifications()
     {
-        return $this->notoficationRepository->all();
+        return $this->notificationRepository->all();
     }
-    public function getNotoficationById($id)
+    public function getNotificationById($id)
     {
-        return $this->notoficationRepository->find($id);
+        return $this->notificationRepository->find($id);
     }
-    public function createNotofication(array $data)
+    public function createNotification(array $data)
     {
-        return $this->notoficationRepository->create($data);
+        return $this->notificationRepository->create($data);
     }
-    public function updateNotofication($id, array $data)
+    public function updateNotification($id, array $data)
     {
-        return $this->notoficationRepository->update($id,  $data);
+        return $this->notificationRepository->update($id,  $data);
     }
-    public function deleteNotofication($id)
+    public function deleteNotification($id)
     {
-        return $this->notoficationRepository->delete($id);
+        return $this->notificationRepository->delete($id);
     }
 
 }
