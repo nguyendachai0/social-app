@@ -13,7 +13,7 @@ class EmojiSeeder extends Seeder
      */
     public function run(): void
     {
-        Emoji::factory()->count(10)->create();   
+        Emoji::factory()->count(6)->create();   
 
     }
 }

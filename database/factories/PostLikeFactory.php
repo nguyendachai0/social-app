@@ -20,8 +20,8 @@ class PostLikeFactory extends Factory
     public function definition()
     {
         return [
-            'profile_user_id' => ProfileUser::factory(),
-            'post_id' => UserPost::factory(),
+            'profile_user_id' => $this->faker->numberBetween(1, 150),
+            'post_id' => $this->faker->numberBetween(1,  200),
             'emoji_type_id' => Emoji::factory()->create()->id, 
         ];
     }

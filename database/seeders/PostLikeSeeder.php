@@ -12,6 +12,6 @@ class PostLikeSeeder extends Seeder
      */
     public function run(): void
     {
-        PostLike::factory()->count(20)->create();
+        PostLike::factory()->count(150)->create();
     }
 }

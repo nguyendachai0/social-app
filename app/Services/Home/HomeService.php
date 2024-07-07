@@ -16,12 +16,14 @@ class HomeService implements HomeServiceInterface
     {
         $profileUser = $this->profileUserRepository->find($profileUserId);
         $dataWithRelationship  = $this->profileUserRepository->findWithRelationships($profileUserId);
-        $friends  = $this->profileUserRepository->getFriends($profileUser);
         $friendsStories = $this->profileUserRepository->getFriendsWithStories($profileUser);
+        $friendsPosts = $this->profileUserRepository->getFriendsWithPost($profileUser);
+        $messages = $this->profileUserRepository->getMessages($profileUser);
         return [
             'profile' => $dataWithRelationship,
-            'friends'  => $friends,
-            'friendsStories' => $friendsStories
+            'friendsStories' => $friendsStories,
+            'feed' => $friendsPosts,
+            'messages' => $messages
         ];
     }
 }

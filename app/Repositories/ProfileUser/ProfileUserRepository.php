@@ -35,8 +35,8 @@ class ProfileUserRepository implements ProfileUserRepositoryInterface
     {
         return ProfileUser::with([
             'notifications',
-            'userPosts.postComments.profileUser',
-            'userPosts.postLikes.profileUser',
+            // 'userPosts.postComments.profileUser',
+            // 'userPosts.postLikes.profileUser',
             'stories'
         ])->find($profileUserId);
     }
@@ -51,11 +51,20 @@ class ProfileUserRepository implements ProfileUserRepositoryInterface
                                                     ->pluck('sender_id');
         
         $friendIds = $sentFriendRequests->merge($receivedFriendRequests);
-            return  ProfileUser::whereIn('id', $friendIds)->get();                                            
+            return  $this->profileUser->whereIn('id', $friendIds)->get();                                            
     }
     public function getFriendsWithStories(ProfileUser $profileUser)
     {
         $friends = $this->getFriends($profileUser);
         return $friends->load('stories');
+    }
+    public function getFriendsWithPost(ProfileUser $profileUser)
+    {
+        $friends = $this->getFriends($profileUser);
+        return $friends->load('userPosts');
+    }
+    public function getMessages(ProfileUser $profileUser)
+    {
+        return $this->profileUser->messages()->with('conversation')->get();
     }
 }

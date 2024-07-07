@@ -12,6 +12,6 @@ class UserPostSeeder extends Seeder
      */
     public function run(): void
     {
-        UserPost::factory()->count(30)->create();
+        UserPost::factory()->count(200)->create();
     }
 }

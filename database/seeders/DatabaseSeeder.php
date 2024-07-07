@@ -19,11 +19,11 @@ class DatabaseSeeder extends Seeder
         // PostCommentSeeder::class,
         // ConversationSeeder::class,
         // PostLikeSeeder::class,
-        // CommentLikeSeeder::class,
-        FriendRequestSeeder::class,
+        // FriendRequestSeeder::class,
         // NotificationSeeder::class,
         // ParticipantSeeder::class,
-        // StorySeeder::class
+        CommentLikeSeeder::class,
+        StorySeeder::class
     ]);
     }
 }

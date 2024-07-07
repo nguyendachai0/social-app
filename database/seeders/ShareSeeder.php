@@ -13,6 +13,6 @@ class ShareSeeder extends Seeder
      */
     public function run(): void
     {
-        Share::factory()->count(20)->create();
+        Share::factory()->count(150)->create();
     }
 }

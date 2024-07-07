@@ -18,7 +18,7 @@ class UserPostFactory extends Factory
     public function definition()
     {
         return [
-            'profile_user_id' => ProfileUser::factory(),
+            'profile_user_id' => $this->faker->numberBetween(1, 150),
             'caption' => $this->faker->sentence,
             'media_url' => $this->faker->imageUrl(),
             'shared_count' => $this->faker->numberBetween(0, 100),

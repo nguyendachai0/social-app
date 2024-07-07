@@ -17,7 +17,7 @@ class HomeController extends Controller
     }
         public function index()
         {
-            if (Auth::attempt(['email' => 'nguyendmim@gmail.com', 'password' => 'password'])) {
+            if (Auth::attempt(['email' => 'medhurst.daisy@example.com', 'password' => 'password'])) {
             $user = Auth::user(); 
             $userId = $user->id; 
             

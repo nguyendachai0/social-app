@@ -30,7 +30,7 @@ class NotificationFactory extends Factory
         $referenceType = $this->faker->randomElement($this->referenceTypes);
 
         return [
-            'profile_user_id' => ProfileUser::factory(),
+            'profile_user_id' => $this->faker->numberBetween(1, 150),
             'type' => $this->faker->randomElement(['message', 'share', 'friend_request', 'comment_like', 'post_comment', 'post_like', 'conversation', 'user_post']),
             'reference_id' => $this->faker->randomDigitNotNull,
             'reference_type' => $referenceType,
