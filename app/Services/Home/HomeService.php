@@ -18,7 +18,7 @@ class HomeService implements HomeServiceInterface
         $dataWithRelationship  = $this->profileUserRepository->findWithRelationships($profileUserId);
         $friendsStories = $this->profileUserRepository->getFriendsWithStories($profileUser);
         $friendsPosts = $this->profileUserRepository->getFriendsWithPost($profileUser);
-        $messages = $this->profileUserRepository->getMessages($profileUser);
+        $messages = $this->profileUserRepository->getMessages($profileUserId);
         return [
             'profile' => $dataWithRelationship,
             'friendsStories' => $friendsStories,

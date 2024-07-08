@@ -18,4 +18,8 @@ class Conversation extends Model
     {
         return $this->hasMany(Participant::class, 'conversation_id');
     }
+    public function messages()
+    {
+        return $this->hasMany(Message::class, 'conversation_id');
+    }
 }

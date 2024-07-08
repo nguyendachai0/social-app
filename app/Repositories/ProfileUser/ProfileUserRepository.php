@@ -33,7 +33,7 @@ class ProfileUserRepository implements ProfileUserRepositoryInterface
     }
     public function findWithRelationships($profileUserId)
     {
-        return ProfileUser::with([
+        return $this->profileUser::with([
             'notifications',
             // 'userPosts.postComments.profileUser',
             // 'userPosts.postLikes.profileUser',
@@ -63,8 +63,12 @@ class ProfileUserRepository implements ProfileUserRepositoryInterface
         $friends = $this->getFriends($profileUser);
         return $friends->load('userPosts');
     }
-    public function getMessages(ProfileUser $profileUser)
+    public function getMessages($profileUserId)
     {
-        return $this->profileUser->messages()->with('conversation')->get();
+        return $this->profileUser->with([
+            // 'messages',
+        // 'participants.conversation.messages'
+        'participants.conversation.messages.sender'
+        ])->find($profileUserId);
     }
 }

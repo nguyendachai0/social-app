@@ -14,7 +14,7 @@ class Participant extends Model
     {
         return $this->belongsTo(Conversation::class, 'conversation_id');
     }
-    public function user()
+    public function profileUsers()
     {
         return $this->belongsTo(ProfileUser::class, 'profile_user_id');
     }
