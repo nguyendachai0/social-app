@@ -19,7 +19,7 @@ class ShareFactory extends Factory
     public function definition()
     {
         return [
-            'profile_user_id' => $this->faker->numberBetween(1, 150),
+            'profile_user_id' => ProfileUser::factory(),
             'post_id' => UserPost::factory(),
             'recaption' => $this->faker->sentence,
             'shared_at' => $this->faker->dateTimeBetween('-1 month', 'now'),

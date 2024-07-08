@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\Models;
 
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\FriendRequest;
 use App\Models\ProfileUser;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class FriendRequestTest extends TestCase
@@ -16,7 +16,12 @@ class FriendRequestTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->friendRequest = FriendRequest::factory()->create();
+        $receiver  = ProfileUser::factory()->create();
+        $sender = ProfileUser::factory()->create();
+        $this->friendRequest = FriendRequest::factory()->create([
+            'sender_id' => $sender->id,
+            'receiver_id' => $receiver->id
+        ]);
     }
 
     public function testItCanCreateFriendRequest()

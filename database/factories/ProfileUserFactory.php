@@ -23,7 +23,7 @@ class ProfileUserFactory extends Factory
     public function definition(): array
     {
         return [
-            'email' => $this->faker->unique()->safeEmail,
+            'email' => fake()->unique()->safeEmail(),
             'password' => bcrypt('password'), // bcrypt for hashing password
             'date_of_birth' => $this->faker->date(),
             'first_name' => $this->faker->firstName,

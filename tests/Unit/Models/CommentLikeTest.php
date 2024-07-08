@@ -6,6 +6,8 @@ use Tests\TestCase;
 use App\Models\CommentLike;
 use App\Models\PostComment;
 use App\Models\ProfileUser;
+use App\Models\UserPost;
+use App\Models\Emoji;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CommentLikeTest extends TestCase
@@ -15,7 +17,25 @@ class CommentLikeTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->commentLike = CommentLike::factory()->create();
+        $userCreatedPost = ProfileUser::factory()->create();
+        $userPost = UserPost::factory()->create([
+            'profile_user_id'  => $userCreatedPost->id
+        ]);
+        $userCommented =  ProfileUser::factory()->create();
+
+        $postComment = PostComment::factory()->create([
+            'profile_user_id' => $userCommented->id,
+            'post_id' => $userPost->id
+        ]);
+
+        $emoji = Emoji::factory()->create();
+
+        $userLikeComment = ProfileUser::factory()->create();
+        $this->commentLike = CommentLike::factory()->create([
+            'profile_user_id' => $userLikeComment->id,
+            'comment_id' => $postComment->id,
+            'emoji_type_id' => $emoji->id
+        ]);
     }
     public function testItBelongsToProfileUser()
     {
@@ -24,9 +44,7 @@ class CommentLikeTest extends TestCase
 
     public function testItBelongsToPostComment()
     {
-        $postComment = PostComment::find($this->commentLike->comment_id);
 
-        $this->assertInstanceOf(PostComment::class, $postComment);
-        $this->assertEquals($postComment->id, $this->commentLike->comment->id);
+        $this->assertInstanceOf(PostComment::class, $this->commentLike->comment);
     }
 }

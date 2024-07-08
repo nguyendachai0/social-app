@@ -1,7 +1,8 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Conversation;
+use App\Models\ProfileUser;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,8 @@ class MessageFactory extends Factory
     public function definition(): array
     {
         return [
-            'conversation_id' => $this->faker->numberBetween(1, 150),
-            'sender_id' => $this->faker->numberBetween(1,150),
+            'conversation_id' => Conversation::factory(),
+            'sender_id' => ProfileUser::factory(),
             'message_content'=>  $this->faker->sentence,
             'media_url' => $this->faker->imageUrl(),
             'read_at' => now()

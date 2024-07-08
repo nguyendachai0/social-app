@@ -18,7 +18,7 @@ class StoryFactory extends Factory
     public function definition()
     {
         return [
-            'profile_user_id' => $this->faker->numberBetween(1,150),
+            'profile_user_id' => ProfileUser::factory(),
             'media_url' => $this->faker->imageUrl(),
             'shared_count' => $this->faker->numberBetween(0, 100),
         ];

@@ -20,9 +20,9 @@ class CommentLikeFactory extends Factory
     public function definition()
     {
         return [
-            'profile_user_id' => $this->faker->numberBetween(1, 150),
-            'comment_id' => $this->faker->numberBetween(1,  150),
-            'emoji_type_id' => $this->faker->numberBetween(1,4),
+            'profile_user_id' => ProfileUser::factory(),
+            'comment_id' => PostComment::factory(),
+            'emoji_type_id' => Emoji::factory(),
         ];
     }
 }

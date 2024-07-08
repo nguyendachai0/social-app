@@ -22,8 +22,8 @@ class PostCommentFactory extends Factory
         return [
             'comment_content' => $this->faker->sentence,
             'media' => $this->faker->imageUrl(),
-            'profile_user_id' => $this->faker->numberBetween(1, 150),
-            'post_id' => $this->faker->numberBetween(1, 200),
+            'profile_user_id' => ProfileUser::factory(),
+            'post_id' => UserPost::factory(),
             'parent_comment_id' => null, // Assuming it's nullable and starts as null
         ];
     }

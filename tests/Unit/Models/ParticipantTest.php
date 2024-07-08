@@ -11,16 +11,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class ParticipantTest extends TestCase
 {
     use RefreshDatabase;
-
-    public function test_it_belongs_to_a_conversation()
+    private $participant;
+    protected function setUp(): void
     {
-        $participant = Participant::factory()->create();
-        $this->assertInstanceOf(Conversation::class, $participant->conversation);
+        parent::setUp();
+        $profileUser = ProfileUser::factory()->create();
+        $conversation = Conversation::factory()->create();
+        $this->participant = Participant::factory()->create([
+            'profile_user_id' => $profileUser->id,
+            'conversation_id' => $conversation->id,
+        ]);
     }
 
-    public function test_it_belongs_to_a_user()
+    public function testItBelongToAConversation()
     {
-        $participant = Participant::factory()->create();
-        $this->assertInstanceOf(ProfileUser::class, $participant->user);
+        $this->assertInstanceOf(Conversation::class, $this->participant->conversation);
+    }
+
+    public function testItBelongToSomeOne()
+    {
+        $this->assertInstanceOf(ProfileUser::class, $this->participant->profileUsers);
     }
 }

@@ -20,7 +20,7 @@ class ParticipantFactory extends Factory
     {
         return [
             'conversation_id' => Conversation::factory(),
-            'profile_user_id' => $this->faker->numberBetween(1, 150),
+            'profile_user_id' => ProfileUser::factory(),
             'joined_at' => $this->faker->dateTimeBetween('-1 month', 'now'),
         ];
     }

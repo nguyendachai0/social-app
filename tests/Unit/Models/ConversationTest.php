@@ -5,6 +5,7 @@ namespace Tests\Unit\Models;
 use Tests\TestCase;
 use App\Models\Conversation;
 use App\Models\Participant;
+use App\Models\ProfileUser;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ConversationTest extends TestCase
@@ -13,9 +14,16 @@ class ConversationTest extends TestCase
 
     public function testItHasManyParticipants()
     {
+        $users = ProfileUser::factory()->count(3)->create();
         $conversation = Conversation::factory()->create();
-
-        // Assuming you want to create 3 participants for this conversation
+        foreach($users as $user)
+        {
+            Participant::factory()->create([
+                'profile_user_id' => $user->id,
+                'conversation_id' => $conversation->id
+            ]);
+        }
+        $conversation = Conversation::factory()->create();
         Participant::factory()->count(3)->create([
             'conversation_id' => $conversation->id,
         ]);
